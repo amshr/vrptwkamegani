@@ -44,9 +44,11 @@ while not(isempty(sortedCustomers))
             costs = costToAdd(route, j, B);
             costs = quicksort(costs);
             routePosition = costs(2,1);
-            %checar aki se não viola janela de tempo
-            route = addAt(route, routePosition, j);
-            reverseCustomers = removeElement(reverseCustomers, i);
+            check=isTimeFactible(A, B, route, routePosition, j);
+            if (check==1)
+                route = addAt(route, routePosition, j);
+                reverseCustomers = removeElement(reverseCustomers, i);
+            end
             i = i-1;   
         else
             [n,m]=size(route);
