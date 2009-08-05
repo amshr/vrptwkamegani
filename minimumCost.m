@@ -1,4 +1,5 @@
 function cost=minimumCost(A, B)
+%Returns a list with the cost to add each client as first.
 
 alfa = 0.7;
 beta = 0.1;
