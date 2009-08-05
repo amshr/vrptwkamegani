@@ -1,4 +1,5 @@
 function newList=removeElement(list, i)
+%Removes the element at position i.
 
 newList = [];
 [n,m] = size(list);

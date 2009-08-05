@@ -1,11 +1,7 @@
 function B=disttab(A)
+%Calculates the distance between any two clients and between the deposit
+%and the clients.
 
-int n;
-int i;
-int j;
-double aux1;
-double aux2;
-int B;
 [n,m] = size(A);
 for i=1:n
 	for j=i:n

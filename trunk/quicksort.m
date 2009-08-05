@@ -1,4 +1,5 @@
 function sorted=quicksort(list)
+%Sorts a 2xm matrix according to the first line.
 
 [n,m] = size(list);
 if (m<=1)
