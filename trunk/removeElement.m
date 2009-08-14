@@ -1,11 +1,11 @@
-function newList=removeElement(list, i)
-%Removes the element at position i.
+function newList=removeElement(list, i, n)
+%Removes n elements starting at position i.
 
 newList = [];
 [n,m] = size(list);
 for l=1:i-1
     newList=[newList list(l)];
 end
-for l=i+1:m
+for l=i+n:m
     newList=[newList list(l)];
 end
