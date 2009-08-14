@@ -14,13 +14,14 @@ for l=1:m
                     jPos=1;
                     for iPos=1:routeSize(l)-i+1
                         for jPos=1:routeSize(k)-i+1)
-                            %esqueci de remover o elemento da rota
-                            %anterior.. melhor mudar isso tudo, senao vai
-                            %ficah meio errado
-                            elementl=selectElements(iPos, i);
-                            elementk=selectElements(jPos, j)
-                            newRoutel=createNewRoute(routes(l,:), elementk, i);
-                            newRoutek=createNewRoute(routes(k,:), elementl, j);
+                            elementl=selectElements(routes(l,:), iPos, i);
+                            elementk=selectElements(routes(k,:), jPos, j);
+                            newRoutel=routes(l,:);
+                            newRoutek=routes(k,:);
+                            newRoutel=removeElements(newRoutel, iPos, i);
+                            newRoutek=removeElements(newRoutek, jPos, j);
+                            newRoutel=addAt(newRoutel, elementk, i);
+                            newRoutek=addAt(newRoutek, elementl, j);
                             costl=checkDCost(routes(l,:), newRoutel);
                             costk=checkDCost(routes(k,:), newRoutek);
                             cost=cost1+cost2;
