@@ -18,7 +18,7 @@ while not(isempty(sortedCustomers))
         j=sortedCustomers(i);
         if(B(1,j)<A(j,5))&(A(j,3)<routeCapacity);
             firstCustomer=j;
-            sortedCustomers = removeElement(sortedCustomers,i);
+            sortedCustomers = removeElement(sortedCustomers,i,1);
             break
         end
     end
@@ -47,7 +47,7 @@ while not(isempty(sortedCustomers))
             check=isTimeFactible(A, B, route, routePosition, j);
             if (check==1)
                 route = addAt(route, routePosition, j);
-                reverseCustomers = removeElement(reverseCustomers, i);
+                reverseCustomers = removeElement(reverseCustomers, i,1);
             end
             i = i-1;   
         else
