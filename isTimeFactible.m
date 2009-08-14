@@ -23,12 +23,16 @@ for l=1:i
 end
 t=t+A(list(i),6);
 
-%Time to visit all the clients until i, plus j
+%Time to visit all the clients until i, plus j, checking factibility for j
 u=t+B(list(i),j);
 if (A(j,4)>u)
     t=A(j,4);
-else
-    t=u;
+else if (A(j,5)<u)
+        check=0;
+        return
+    else
+        t=u;
+    end
 end
 t=t+A(j,6);
 
