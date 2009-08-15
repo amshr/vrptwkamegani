@@ -1,4 +1,4 @@
-function deltaCost=checkDCost(originalRoute, newRoute, disttab, A);
+function deltaCost=checkDCost(originalRoute, newRoute, A, disttab);
 
 originalDistance=totalDistance(originalRoute, disttab);
 newDistance=totalDistance(newRoute, disttab);
