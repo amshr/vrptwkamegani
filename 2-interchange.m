@@ -1,4 +1,4 @@
-function newRoutes=2-interchange(routes)
+function newRoutes=2-interchange(routes, A, disttab)
 
 [n,m]=size(routes);
 for i=1:n
@@ -22,8 +22,8 @@ for l=1:m
                             newRoutek=removeElements(newRoutek, jPos, j);
                             newRoutel=addAt(newRoutel, elementk, i);
                             newRoutek=addAt(newRoutek, elementl, j);
-                            costl=checkDCost(routes(l,:), newRoutel);
-                            costk=checkDCost(routes(k,:), newRoutek);
+                            costl=checkDCost(routes(l,:), newRoutel, A, disttab);
+                            costk=checkDCost(routes(k,:), newRoutek, A, disttab);
                             cost=cost1+cost2;
                             if (cost<0)
                                 sizel=sizeOfRoute(newRoutel);
@@ -37,7 +37,7 @@ for l=1:m
                                     end
                                 end
                                 for h=1:sizek
-                                    routes(k,h)=newRoutel(h);
+                                    routes(k,h)=newRoutek(h);
                                 end
                                 if routeSize(k,1)>sizel
                                     for h=sizek:routeSize(k,1)
@@ -53,5 +53,3 @@ for l=1:m
         end
     end
 end
-                            
-            
