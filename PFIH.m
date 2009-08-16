@@ -8,8 +8,13 @@ costs=minimumCost(A,B);
 sortedCosts=quicksort(costs);
 sortedCustomers=sortedCosts(2,:);
 reverseCustomers=0;
+needNewRoute=0;
 
 while not(isempty(sortedCustomers))
+    [u,v]=size(route);
+    for j=1:v
+        routes(r,j) = route(j);
+    end
     r=r+1;
     [n,m]=size(sortedCustomers);
     firstCustomer=0;
@@ -24,7 +29,7 @@ while not(isempty(sortedCustomers))
     end
     if (firstCustomer == 0)
         fprintf ('Solução inexistente');
-        return;
+        return
     end
     route = firstCustomer;
     routeCapacity = routeCapacity - A(j,3);
@@ -44,12 +49,15 @@ while not(isempty(sortedCustomers))
             costs = costToAdd(route, j, B);
             costs = quicksort(costs);
             routePosition = costs(2,1);
-            check=isTimeFactible(A, B, route, routePosition, j);
+            check=isTimeFactible(A, B, route, routePosition+1, j);
             if (check==1)
-                route = addAt(route, routePosition, j);
+                route = addAt(route, j, routePosition);
                 reverseCustomers = removeElement(reverseCustomers, i,1);
             end
             i = i-1;   
+            if (i==0)
+                needNewRoute=1;
+            end
         else
             [n,m]=size(route);
             for i=1:m

@@ -1,6 +1,7 @@
 function costs=costToAdd(route, j, B);
 %Calculates the costs to add a new client between each pair of current
 %clients in the route and returns a list.
+%The second row is the position after which the client should be added.
 
 costs=[];
 [n,m]=size(route);

@@ -1,4 +1,4 @@
-function newRoute=addAt(route, i, newElement)
+function newRoute=addAt(route, newElement, i)
 %Adds an element after position i in an existent route, pushing forward all
 %the next elements.
 
