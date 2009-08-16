@@ -1,7 +1,10 @@
-function size=sizeOfRoute(route)
+function length=sizeOfRoute(route)
 
-i=1;
-while (route(i)~=0)
-    i++;
+[n,m]=size(route);
+for i=1:m
+    if (route(i)==0)
+        length = i-1;
+        return
+    end
 end
-size=i-1;
+length=m;
