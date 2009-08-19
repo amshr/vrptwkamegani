@@ -1,0 +1,6 @@
+bestCostMatrix:
+
+j>i
+
+bestCostM(i,j)=cost of a move.
+bestCostM(j,i)=row of info in bCList.
