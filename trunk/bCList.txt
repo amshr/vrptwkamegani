@@ -1,0 +1,5 @@
+bCList info:
+
+route1 route2 PosAtRoute1 PosAtRoute2 NumberOfElementsFromRoute1 Number2
+route1 route2 PosAtRoute1 PosAtRoute2 NumberOfElementsFromRoute1 Number2
+route1 route2 PosAtRoute1 PosAtRoute2 NumberOfElementsFromRoute1 Number2

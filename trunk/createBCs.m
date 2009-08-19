@@ -1,13 +1,16 @@
-function newRoutes=twoInterchange(routes, A, disttab, capacity)
+function [bestCostM bCList]=createBCs(routes, A, disttab, capacity)
 
 [n,m]=size(routes);
 for i=1:n
     routeSize(i,1)=sizeOfRoute(routes(i,:));
 end
 
+bCListRow=1;
+
 %For each pair of routes
 for l=1:n
     for k=l+1:n
+        minimumCost=2^60;
         %For all combinations of 0, 1 and 2, but not (0, 0)
         for i=0:2
             for j=0:2
@@ -38,33 +41,26 @@ for l=1:n
                             costl = checkDCost(routes(l,:), newRoutel, A, disttab, capacity);
                             costk = checkDCost(routes(k,:), newRoutek, A, disttab, capacity);
                             cost = costl+costk;
-                            if (cost<0)
-                                [rowl, sizel]=size(newRoutel);
-                                [rowk, sizek]=size(newRoutek);
-                                for h=1:sizel
-                                    routes(l,h)=newRoutel(h);
-                                end
-                                if routeSize(l,1)>sizel
-                                    for h=sizel+1:routeSize(l)
-                                        routes(l,h)=0;
-                                    end
-                                end
-                                for h=1:sizek
-                                    routes(k,h)=newRoutek(h);
-                                end
-                                if routeSize(k,1)>sizek
-                                    for h=sizek+1:routeSize(k)
-                                        routes(k,h)=0;
-                                    end
-                                end
-                                newRoutes=removeZeros(routes);
-                                return
+                            if cost<minimumCost 
+                                minimumCost=cost;
+                                minElePosL=iPos;
+                                minElePosK=jPos;
+                                minEleNumL=i;
+                                minEleNumK=j;
                             end
                         end
                     end
                 end
             end
         end
+        bestCostM(l,k)=minimumCost;
+        bestCostM(k,l)=bCListRow;
+        bCList(bCListRow, 1)=l;
+        bCList(bCListRow, 2)=k;
+        bCList(bCListRow, 3)=minElePosL;
+        bCList(bCListRow, 4)=minElePosK;
+        bCList(bCListRow, 5)=minEleNumL;
+        bCList(bCListRow, 6)=minEleNumK;
+        bCListRow = bCListRow + 1;
     end
 end
-newRoutes=removeZeros(routes);
