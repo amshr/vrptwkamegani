@@ -9,7 +9,7 @@ costs=[];
 for i=1:m-1
     previous = route(i);
     next = route(i+1);
-    cost = B(previous+1, j) + B(next+1, j);
+    cost = B(previous+1, j) + B(next+1, j) - B(previous+1, next+1);
     costs = [costs [cost; i]];
 end
 
