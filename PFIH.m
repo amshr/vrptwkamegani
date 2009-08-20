@@ -1,9 +1,8 @@
-function routes=PFIH(A)
+function routes=PFIH(A, B)
 
 r=0;
 route=[];
 routes=[];
-B=disttab(A);
 costs=minimumCost(A,B);
 sortedCosts=quicksort(costs);
 sortedCustomers=sortedCosts(2,:);
