@@ -62,6 +62,7 @@ for d=1:2
             bCList(bestCostM(k,l), 4)=minElePosK;
             bCList(bestCostM(k,l), 5)=minEleNumL;
             bCList(bestCostM(k,l), 6)=minEleNumK;
+            bCList(bestCostM(k,l), 7)=minimumCost;
         else if k<1
                 bestCostM(k,l)=minimumCost;
                 bCList(bestCostM(l,k), 1)=l;
@@ -70,6 +71,7 @@ for d=1:2
                 bCList(bestCostM(l,k), 4)=minElePosK;
                 bCList(bestCostM(l,k), 5)=minEleNumL;
                 bCList(bestCostM(l,k), 6)=minEleNumK;
+                bCList(bestCostM(l,k), 7)=minimumCost;
             end
         end
     end

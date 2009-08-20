@@ -61,6 +61,7 @@ for l=1:n
         bCList(bCListRow, 4)=minElePosK;
         bCList(bCListRow, 5)=minEleNumL;
         bCList(bCListRow, 6)=minEleNumK;
+        bCList(bCListRow, 7)=minimumCost;
         bCListRow = bCListRow + 1;
     end
 end
