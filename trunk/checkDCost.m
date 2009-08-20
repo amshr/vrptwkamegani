@@ -1,4 +1,4 @@
-function deltaCost=checkDCost(originalRoute, newRoute, A, disttab, capacity);
+function deltaCost=checkDCost(originalRoute, newRoute, A, disttab, capacity)
 
 originalRoute=normalize(originalRoute);
 newRoute=normalize(newRoute);

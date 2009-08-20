@@ -15,11 +15,11 @@ else
     t=u;
 end
 if (A(list(1),5)<u)
-	tardiness=u-A(list(1),5)
+	tardiness=u-A(list(1),5);
 end
 
 for l=2:m
-    u=t+B(list(l-1)+1,list(l)+1)
+    u=t+B(list(l-1)+1,list(l)+1);
     if(A(list(l),4)>u)
 		t=A(list(l));
 	else if (A(list(l),5)<u)
