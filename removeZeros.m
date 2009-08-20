@@ -1,4 +1,5 @@
 function newMatrix=removeZeros(matrix)
+%Removes zeros from a matrix of routes.
 
 pos=1;
 [n,m]=size(matrix);

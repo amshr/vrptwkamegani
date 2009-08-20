@@ -1,6 +1,7 @@
 function newRoute=normalize(route)
+%Removes zeros from a route.
 
-newRoute=[]
+newRoute=[];
 [n,m]=size(route);
 
 for i=1:m

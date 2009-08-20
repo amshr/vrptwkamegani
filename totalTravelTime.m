@@ -1,4 +1,4 @@
-function t=totalTravelTime(list, A, B);
+function t=totalTravelTime(list, A, B)
 
 [n,m]=size(list);
 
