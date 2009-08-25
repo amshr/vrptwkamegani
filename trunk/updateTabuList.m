@@ -32,14 +32,14 @@ end
 startFrom=0;
 [rowsTL colsTL]=size(tabuList);
 for i=1:colsTL
-    if (tabuList(3)>iteration)
+    if (tabuList(3,i)>iteration)
         startFrom=i;
         break
     end
 end
 if startFrom>1
     for i=startFrom:colsTL
-        newTabuList=tabuList(i);
+        newTabuList=tabuList(:,i);
     end
 else
     newTabuList=tabuList;
