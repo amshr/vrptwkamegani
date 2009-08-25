@@ -12,12 +12,14 @@ for d=1:2
     l=changedRoutes(d);
     emptyLine=0;
     fixL=0;
+    for e=1:l
+        if routes(e,1)==0
+            fixL=fixL+1;
+        end
+    end
     for k=1:n
         if routes(k,1)==0
             emptyLine=emptyLine+1;
-            if l>k
-                fixL=fixL+1;
-            end
         else
             minimumCost=2^60;
             %For all combinations of 0, 1 and 2, but not (0, 0)
@@ -63,9 +65,7 @@ for d=1:2
                 end
             end
             if k-emptyLine>l-fixL
-                k=k
-                emptyLine=emptyLine
-                bestCostM(l-fixL,k-emptyLine)=minimumCost
+                bestCostM(l-fixL,k-emptyLine)=minimumCost;
                 bCList(bestCostM(k-emptyLine,l-fixL), 1)=l;
                 bCList(bestCostM(k-emptyLine,l-fixL), 2)=k;
                 bCList(bestCostM(k-emptyLine,l-fixL), 3)=minElePosL;
@@ -74,7 +74,7 @@ for d=1:2
                 bCList(bestCostM(k-emptyLine,l-fixL), 6)=minEleNumK;
                 bCList(bestCostM(k-emptyLine,l-fixL), 7)=minimumCost;
             else if k-emptyLine<l-fixL
-                    bestCostM(k-emptyLine,l-fixL)=minimumCost
+                    bestCostM(k-emptyLine,l-fixL)=minimumCost;
                     bCList(bestCostM(l-fixL,k-emptyLine), 1)=l;
                     bCList(bestCostM(l-fixL,k-emptyLine), 2)=k;
                     bCList(bestCostM(l-fixL,k-emptyLine), 3)=minElePosL;

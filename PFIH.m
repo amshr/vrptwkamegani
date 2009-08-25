@@ -28,6 +28,7 @@ while not(isempty(sortedCustomers))
     end
     if (firstCustomer == 0)
         fprintf ('Solução inexistente');
+        routes=0;
         return
     end
     route = firstCustomer;
