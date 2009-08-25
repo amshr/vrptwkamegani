@@ -1,7 +1,11 @@
 function [bestCostM bCList]=updateBCs(routes, A, disttab, capacity, route1, route2, bestCostM, bCList)
 
 [n,m]=size(routes);
-
+[o,p]=size(bestCostM);
+if o==0
+    return
+end
+newCost=0;
 for i=1:n
     routeSize(i,1)=sizeOfRoute(routes(i,:));
 end
@@ -13,19 +17,19 @@ for d=1:2
     emptyLine=0;
     fixL=0;
     for e=1:l
-        if routes(e,1)==0
+        if routes(e,1)==0&&routes(e,2)==1
             fixL=fixL+1;
         end
     end
     for k=1:n
-        if routes(k,1)==0
+        if routes(k,1)==0&&routes(k,2)==1
             emptyLine=emptyLine+1;
         else
             minimumCost=2^60;
             %For all combinations of 0, 1 and 2, but not (0, 0)
             for i=0:2
                 for j=0:2
-                    if not((i==0)&(j==0))
+                    if not((i==0)&&(j==0))
                         %Define a limit, for you can't remove a element after
                         %the end of the route
                         if i==2
@@ -58,13 +62,14 @@ for d=1:2
                                     minElePosK=jPos;
                                     minEleNumL=i;
                                     minEleNumK=j;
+                                    newCost=1;
                                 end
                             end
                         end
                     end
                 end
             end
-            if k-emptyLine>l-fixL
+            if (k-emptyLine>l-fixL)&&(newCost==1)
                 bestCostM(l-fixL,k-emptyLine)=minimumCost;
                 bCList(bestCostM(k-emptyLine,l-fixL), 1)=l;
                 bCList(bestCostM(k-emptyLine,l-fixL), 2)=k;
@@ -73,7 +78,7 @@ for d=1:2
                 bCList(bestCostM(k-emptyLine,l-fixL), 5)=minEleNumL;
                 bCList(bestCostM(k-emptyLine,l-fixL), 6)=minEleNumK;
                 bCList(bestCostM(k-emptyLine,l-fixL), 7)=minimumCost;
-            else if k-emptyLine<l-fixL
+            else if (k-emptyLine<l-fixL)&&(newCost==1)
                     bestCostM(k-emptyLine,l-fixL)=minimumCost;
                     bCList(bestCostM(l-fixL,k-emptyLine), 1)=l;
                     bCList(bestCostM(l-fixL,k-emptyLine), 2)=k;

@@ -43,14 +43,15 @@ while 1
         else
             randTemp=rand(stream,1,1);
             delta=newCost-currentCost;
-            if randTemp<=exp((0-delta)/currentTemperature);
+            if randTemp<=exp((0+delta)/currentTemperature);%assim funciona, mas tah certo?
                 acceptNewRoute=1;
             end
         end
     end
     if acceptNewRoute
-        routes=newRoutes;
-        currentCost=newCost;
+        routes=newRoutes
+        currentCost=newCost
+        bestCost=bestCost
         currentTemperature=currentTemperature/(1+coolingFactor*currentTemperature);
         tabuList=updateTabuList(tabuList, move1, move2, tabuListSize, iteration);
         [bestCostMatrix bestCostList]=updateBCs(newRoutes, A, B, capacity, bestCostList(leastNeighborCost,1), bestCostList(leastNeighborCost,2), bestCostMatrix, bestCostList);
@@ -70,10 +71,10 @@ while 1
             %break
         %end
     end
-    iteration=iteration+1;
+    iteration=iteration+1
     [m,n]=size(routes);
     [j,k]=size(tabuList);
-    if iteration>m*k
+    if iteration>m*k*10
         break
     end
 end
