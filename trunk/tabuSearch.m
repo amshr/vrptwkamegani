@@ -3,12 +3,25 @@ function bestRoutes=tabuSearch(A, capacity)
 stream=RandStream('mrg32k3a');
 
 B=disttab(A);
-routes=PFIH(A, B);
+routes=PFIH(A, B, capacity);
+currentCost=totalCost(routes, B)
+[n,m]=size(routes);
+if n==1
+    bestRoutes=routes;
+    bestCost=totalCost(routes, B)
+    return
+end 
 if routes==0
     bestRoutes=routes;
     return
 end
 routes=twoInterchange(routes, A, B, capacity);
+[n,m]=size(routes);
+if n==1
+    bestRoutes=routes;
+    bestCost=totalCost(routes, B)
+    return
+end    
 currentCost=totalCost(routes, B);
 tabuListSize=10;
 tabuList=[];
@@ -49,9 +62,9 @@ while 1
         end
     end
     if acceptNewRoute
-        routes=newRoutes
-        currentCost=newCost
-        bestCost=bestCost
+        routes=newRoutes;
+        currentCost=newCost;
+        bestCost=bestCost;
         currentTemperature=currentTemperature/(1+coolingFactor*currentTemperature);
         tabuList=updateTabuList(tabuList, move1, move2, tabuListSize, iteration);
         [bestCostMatrix bestCostList]=updateBCs(newRoutes, A, B, capacity, bestCostList(leastNeighborCost,1), bestCostList(leastNeighborCost,2), bestCostMatrix, bestCostList);
@@ -71,12 +84,13 @@ while 1
             %break
         %end
     end
-    iteration=iteration+1
+    iteration=iteration+1;
     [m,n]=size(routes);
     [j,k]=size(tabuList);
     if iteration>m*k*10
         break
     end
 end
+bestCost=bestCost
 bestRoutes=removeZeros(bestRoutes);
     

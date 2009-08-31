@@ -21,11 +21,13 @@ for l=1:i-2
         t=u;
     end
 end
-t=t+A(list(i-1),6);
+if i>1
+    t=t+A(list(i-1),6);
 
 
 %Time to visit all the clients until i-1, plus j, checking feasibility for j
-u=t+B(list(i-1)+1,j+1);
+    u=t+B(list(i-1)+1,j+1);
+end
 if (A(j,4)>u)
     t=A(j,4);
 else if (A(j,5)<u)
@@ -66,6 +68,6 @@ if (m+1>i)
             t=u;
             end
         end
-        t=t+A(list(l,6));
+        t=t+A(list(l),6);
     end
 end

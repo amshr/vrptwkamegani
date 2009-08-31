@@ -1,6 +1,6 @@
 function leastCostMove=selectLeastCostMoves(lcMatrix, lastLeast)
 [n,m]=size(lcMatrix);
-if n==1
+if n==1||n==0
     leastCostMove=0;
     return
 end
