@@ -6,6 +6,8 @@ for i=1:n
 end
 
 bCListRow=1;
+bestCostM=[];
+bCList=[];
 
 %For each pair of routes
 for l=1:n

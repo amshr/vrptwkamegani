@@ -3,6 +3,7 @@ function newMatrix=removeZeros(matrix)
 
 pos=1;
 [n,m]=size(matrix);
+newMatrix=[];
 
 for i=1:n
     if matrix(i,1)~=0

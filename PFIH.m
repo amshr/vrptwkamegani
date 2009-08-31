@@ -1,4 +1,4 @@
-function routes=PFIH(A, B)
+function routes=PFIH(A, B, capacity)
 
 r=0;
 route=[];
@@ -17,10 +17,10 @@ while not(isempty(sortedCustomers))
     r=r+1;
     [n,m]=size(sortedCustomers);
     firstCustomer=0;
-    routeCapacity=35;
+    routeCapacity=capacity;
     for i=1:m
         j=sortedCustomers(i);
-        if(B(1,j)<A(j,5))&(A(j,3)<routeCapacity);
+        if(B(1,j+1)<A(j,5))&&(A(j,3)<routeCapacity);
             firstCustomer=j;
             sortedCustomers = removeElement(sortedCustomers,i,1);
             break
@@ -49,29 +49,22 @@ while not(isempty(sortedCustomers))
             costs = costToAdd(route, j, B);
             costs = quicksort(costs);
             routePosition = costs(2,1);
-            check=isTimeFactible(A, B, route, routePosition+1, j);
-            if (check==1)
+            if (isTimeFactible(A, B, route, routePosition+1, j))
                 route = addAt(route, j, routePosition);
-                reverseCustomers = removeElement(reverseCustomers, i,1);
+                reverseCustomers = removeElement(reverseCustomers, i, 1);
             end
-            i = i-1;   
+            i = i-1;
             if (i==0)
                 needNewRoute=1;
             end
+            sortedCustomers= fliplr(reverseCustomers);
         else
             [n,m]=size(route);
-            for i=1:m
-                routes(r,i) = route(i);
+            for o=1:m
+                routes(r,o) = route(o);
             end
-            break;
+            i=i-1;
+            sortedCustomers= fliplr(reverseCustomers);
         end
-        if (isempty(reverseCustomers))
-            [n,m]=size(route);
-            for i=1:m
-                routes(r,i) = route(i);
-            end
-            break;
-        end
-        sortedCustomers= fliplr(reverseCustomers);
     end
 end
