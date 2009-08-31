@@ -1,0 +1,7 @@
+tabuList info:
+
+client1 client2 client3 client4
+route1  route2  route3  route4
+time1   time2   time3   time4
+
+time1<=time2<=time3<=time4
