@@ -1,5 +1,0 @@
-matriz A
-
-cliente 1: x y carga inicioT finalT tempoAtendimento
-cliente 2: x y carga inicioT finalT tempoAtendimento
-cliente n: x y carga inicioT finalT tempoAtendimento
