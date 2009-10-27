@@ -1,4 +1,4 @@
-function trucks=PFIH(A, B, capacity)
+function routes=PFIH(A, B, capacity)
 
 r=0;
 route=[];
@@ -68,5 +68,3 @@ while not(isempty(sortedCustomers))
         end
     end
 end
-[m,n]=size(routes);
-trucks=m;
