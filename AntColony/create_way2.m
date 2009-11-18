@@ -27,14 +27,14 @@ for i=1:antsNumber
         prob_sum=0;
         for i=1:col_not_vis
             if (current_time+B[current_client+1, next_client] <= A[next_client, 4])
-                probability[not_visited[i]]=(phero[current_client, not_visited[i]]*(distance_table[not_visited[i]])^beta)<phero[j]*(distance_table[j])^beta);
-                prob_sum=prob_sum+probability[[not_visited[i]];
+                probability[not_visited[i]]=(phero[current_client, not_visited[i]]*(distance_table[not_visited[i]])^beta)<phero[j]*(distance_table[j])^beta)
+                prob_sum=prob_sum+probability[[not_visited[i]]
             else
                 probability[not_visited[i]]=0;
             end
         end
         for i=1:col_not_vis
-            probability[not_visited[i]]=probability[not_visited[i]]/prob_sum;
+            probability[not_visited[i]]=probability[not_visited[i]]/prob_sum
         end
         j=roulette(probability);
     end
