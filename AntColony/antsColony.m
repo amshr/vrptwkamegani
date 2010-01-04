@@ -14,11 +14,11 @@ not_visited=[];
 was_left=zeros(m,1);
 [best_route, best_not_visited, phero]=make_way(capacity, clients, A, B, phero, was_left);
 [best_size_not_visited, n]=size(best_not_visited);
-for k=1:1
+for k=1:50
     for i=1:numberOfAnts
         ant=i;
         [current_route, not_visited, phero]=make_way(capacity, clients, A, B, phero, was_left);
-        current_route
+        current_route=current_route
         [size_not_visited, n]=size(not_visited);
         if size_not_visited<best_size_not_visited
             best_route=current_route;
