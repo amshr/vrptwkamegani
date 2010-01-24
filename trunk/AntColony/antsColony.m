@@ -31,9 +31,9 @@ for k=1:50
                 best_feasible_cost=current_cost;
             end
         end
-        phero=global_update(phero, best_route, B, lambda);
-        phero=global_update(phero, best_feasible, B, lambda);
         was_left=left_update(was_left, not_visited);
     end
+    phero=global_update(phero, best_route, B, lambda);
+    phero=global_update(phero, best_feasible, B, lambda);
 end
 route=best_feasible;

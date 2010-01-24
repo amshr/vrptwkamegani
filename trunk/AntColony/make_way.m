@@ -79,6 +79,7 @@ while not(isempty(not_visited))
                 %disp('pediu outro caminhao')
             end
         else
+            phero(current_client+1, 1) = (1-lambda)*phero(current_client+1, 1)+lambda*tauZero;
             current_weight=0;
             row=row+1;
             column=0;
@@ -91,8 +92,10 @@ while not(isempty(not_visited))
         for i=1:col_not_vis
             probability=[];
             if (current_time+B(current_client+1, not_visited(i)+1) <= A(not_visited(i), 5))
-                probability(i)=(phero(current_client+1, not_visited(i)+1)*(distance_table(not_visited(i)))^beta);
-                prob_sum=prob_sum+probability(i);
+                if A(i, 3)+current_weight>capacity;
+                    probability(i)=(phero(current_client+1, not_visited(i)+1)*(distance_table(not_visited(i)))^beta);
+                    prob_sum=prob_sum+probability(i);
+                end
             else
                 probability(not_visited(i))=0;
             end
