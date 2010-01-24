@@ -1,5 +1,6 @@
 function [current_route, not_visited, phero]=make_way(capacity, clients, A, B, phero, was_left)
 
+
 q=1/2;
 [m,n]=size(A);
 not_visited=clients;
@@ -14,7 +15,7 @@ lambda=0.5;
 tauZero=0.5;
 
 
-for l=1:m
+while not(isempty(not_visited))
     for k=1:m
         start_time=max(current_time+B(current_client+1, k), A(k, 4));
         delta_time=start_time-current_time;
@@ -23,33 +24,50 @@ for l=1:m
         distance=max(1,distance);
         distance_table(k)=1/distance;
     end
+    j=0;
     [lin_not_vis, col_not_vis]=size(not_visited);
     rand_num=rand(1);
     if rand_num<q
-        infeasible=0;
+        newTruck=1;
         for i=1:col_not_vis
-            if current_time+B(current_client+1, not_visited(i)) <= A(not_visited(i), 5)
-                not_visited(i)
-                j=not_visited(i);
-                pos=i;
-                infeasible = 1;
-                break;
+            %current_time = current_time
+            %b= B(current_client+1, not_visited(i)+1)
+            %tempo_necessario= current_time+B(current_client+1, not_visited(i)+1)
+            %tempo_disp = A(not_visited(i), 5)
+            if current_time+B(current_client+1, not_visited(i)+1) <= A(not_visited(i), 5)
+                if current_client ~= 0
+                    if A(current_client, 3)+current_weight<capacity;
+                        j=not_visited(i);
+                        pos=i;
+                        newTruck = 0;
+                        break;
+                    end
+                else
+                    j=not_visited(i);
+                    pos=i;
+                    newTruck = 0;
+                    break;
+                end
             end
         end
-        if (infeasible == 1)
+        if (newTruck == 0)
+            % ve se tem algum outro q caiba nesse horario com menor valor
+            % heuristico
             for i=1:col_not_vis
                 if (phero(not_visited(i)+1, current_client+1)*(distance_table(i))^beta)<(phero(j+1, current_client+1)*(distance_table(j))^beta)
                     if (current_time+B(current_client+1, not_visited(i)) <= A(not_visited(i), 5))
-                        j=not_visited(i);
-                        pos=i;
+                        if current_client ~= 0
+                            if A(current_client, 3)+current_weight<capacity
+                                j=not_visited(i);
+                                pos=i;
+                            end
+                        else
+                            j=not_visited(i);
+                            pos=i;
+                        end
                     end
                 end
-            end
-            if A(j, 3)+current_weight>capacity;
-                current_weight=0;
-                row=row+1;
-                column=0;
-                current_time=current_time+B(current_client+1, 1);
+                %disp('foi no mesmo caminhao')
             end
             if j~=0
                 column=column+1;
@@ -58,9 +76,14 @@ for l=1:m
                 not_visited = removeElement(not_visited, pos, 1);
                 phero(current_client+1, j+1) = (1-lambda)*phero(current_client+1, j+1)+lambda*tauZero;
                 current_client=j;
+                %disp('pediu outro caminhao')
             end
         else
-            return
+            current_weight=0;
+            row=row+1;
+            column=0;
+            current_time=0;
+            current_client = 0;
         end
     else
         prob_sum=0;
@@ -80,7 +103,7 @@ for l=1:m
             current_weight=0;
             row=row+1;
             column=0;
-            current_time=current_time+B(current_client+1, 1);
+            current_time=0;
             current_client=j;
         else
             j=not_visited(ele);
@@ -89,7 +112,7 @@ for l=1:m
                 current_weight=0;
                 row=row+1;
                 column=0;
-                current_time=current_time+B(current_client+1, 1);
+                current_time=0;
                 current_client=j;
             else
                 column=column+1;
