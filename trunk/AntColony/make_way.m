@@ -1,18 +1,17 @@
-function [current_route, not_visited, phero]=make_way(capacity, clients, A, B, phero, was_left)
+function [current_route, phero]=make_way(capacity, clients, A, B, phero, tauZero)
 
 
-q=1/2;
+q=0.75;
 [m,n]=size(A);
 not_visited=clients;
 current_route=[];
 current_time=0;
 current_weight=0;
 current_client=0;
-beta=0.5;
+beta=1;
 column=0;
 row=1;
-lambda=0.5;
-tauZero=0.5;
+lambda=0.1;
 
 
 while not(isempty(not_visited))
@@ -20,7 +19,7 @@ while not(isempty(not_visited))
         start_time=max(current_time+B(current_client+1, k), A(k, 4));
         delta_time=start_time-current_time;
         urgency=A(k, 5)-current_time;
-        distance=delta_time*urgency-was_left(k);
+        distance=delta_time*urgency;
         distance=max(1,distance);
         distance_table(k)=1/distance;
     end
@@ -92,10 +91,8 @@ while not(isempty(not_visited))
         for i=1:col_not_vis
             probability=[];
             if (current_time+B(current_client+1, not_visited(i)+1) <= A(not_visited(i), 5))
-                if A(i, 3)+current_weight>capacity;
-                    probability(i)=(phero(current_client+1, not_visited(i)+1)*(distance_table(not_visited(i)))^beta);
-                    prob_sum=prob_sum+probability(i);
-                end
+                probability(i)=(phero(current_client+1, not_visited(i)+1)*(distance_table(not_visited(i)))^beta);
+                prob_sum=prob_sum+probability(i);
             else
                 probability(not_visited(i))=0;
             end
@@ -128,8 +125,7 @@ while not(isempty(not_visited))
         end
     end
     if j~=0
-           current_route(row, column)=j
-           not_visited=not_visited
+           current_route(row, column)=j;
     end
 end
     
