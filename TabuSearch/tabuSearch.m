@@ -56,7 +56,7 @@ while 1
         else
             randTemp=rand(stream,1,1);
             delta=newCost-currentCost;
-            if randTemp<=exp((0+delta)/currentTemperature);%assim funciona, mas tah certo?
+            if randTemp<=exp((0+delta)/currentTemperature);
                 acceptNewRoute=1;
             end
         end

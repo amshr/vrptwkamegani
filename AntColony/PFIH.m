@@ -67,4 +67,10 @@ while not(isempty(sortedCustomers))
             sortedCustomers= fliplr(reverseCustomers);
         end
     end
+    if(isempty(sortedCustomers)),
+        [n,m]=size(route);
+        for o=1:m
+            routes(r,o) = route(o);
+        end
+    end        
 end

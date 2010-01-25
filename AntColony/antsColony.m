@@ -1,39 +1,36 @@
 function route=antsColony(A, B, capacity, numberOfAnts)
 
-capacity=30;
-lambda=0.5;
+lambda=0.1;
 phero=[];
 [m,n]=size(A);
 for i=1:m
     clients(i)=i;
 end
-best_feasible=PFIH(A, B, capacity);
-best_feasible_cost=totalDistance(best_feasible, B);
+pfih_sol=PFIH(A, B, capacity);
+best_feasible = pfih_sol;
+best_feasible_cost=totalDistance(best_feasible, B, 0);
+[best_rows, cols] = size(best_feasible);
+truck_value = best_feasible_cost/best_rows;
+first_cost = totalDistance(best_feasible, B, truck_value);
+best_feasible_cost = first_cost;
 phero=phero_initialize(phero, best_feasible_cost, m);
-not_visited=[];
-was_left=zeros(m,1);
-[best_route, best_not_visited, phero]=make_way(capacity, clients, A, B, phero, was_left);
-[best_size_not_visited, n]=size(best_not_visited);
+tauZero = 1/(best_feasible_cost*m);
+[best_route, phero]=make_way(capacity, clients, A, B, phero, tauZero);
 for k=1:50
     for i=1:numberOfAnts
         ant=i;
-        [current_route, not_visited, phero]=make_way(capacity, clients, A, B, phero, was_left);
-        current_route=current_route
-        [size_not_visited, n]=size(not_visited);
-        if size_not_visited<best_size_not_visited
-            best_route=current_route;
-            best_not_visited=not_visited;
+        [current_route, phero]=make_way(capacity, clients, A, B, phero, tauZero);
+        current_route
+        current_cost=totalDistance(current_route, B, truck_value)
+        if current_cost<best_feasible_cost
+            best_feasible=current_route;
+            best_feasible_cost=current_cost;
         end
-        if size_not_visited==0
-            current_cost=totalDistance(current_route, B);
-            if current_cost<best_feasible_cost
-                best_feasible=current_route;
-                best_feasible_cost=current_cost;
-            end
-        end
-        was_left=left_update(was_left, not_visited);
     end
     phero=global_update(phero, best_route, B, lambda);
-    phero=global_update(phero, best_feasible, B, lambda);
 end
+truck_value
+pfih_sol
+first_cost
+best_feasible_cost
 route=best_feasible;
