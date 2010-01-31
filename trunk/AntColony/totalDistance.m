@@ -13,4 +13,4 @@ for i=1:m-1
 	distance=distance+disttab(route(i)+1,route(i+1)+1);
 end
 distance=distance+disttab(route(m)+1,1);
-distance = n*truck_value + distance;
+distance = 50*n*truck_value + distance;
