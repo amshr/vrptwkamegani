@@ -64,7 +64,6 @@ while 1
     if acceptNewRoute
         routes=newRoutes;
         currentCost=newCost;
-        bestCost=bestCost;
         currentTemperature=currentTemperature/(1+coolingFactor*currentTemperature);
         tabuList=updateTabuList(tabuList, move1, move2, tabuListSize, iteration);
         [bestCostMatrix bestCostList]=updateBCs(newRoutes, A, B, capacity, bestCostList(leastNeighborCost,1), bestCostList(leastNeighborCost,2), bestCostMatrix, bestCostList);
