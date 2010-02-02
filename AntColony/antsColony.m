@@ -18,7 +18,6 @@ tauZero = 1/(best_feasible_cost*m);
 a=0
 [best_route, phero]=make_way(capacity, clients, A, B, phero, tauZero);
 k=1
-%for k=1:2000
 while 1
     k=k+1
     for i=1:numberOfAnts
@@ -34,7 +33,7 @@ while 1
     phero=global_update(phero, best_route, B, lambda);
     phero=global_update(phero, best_route, B, lambda);
     a=a+1
-    if (a>500)
+    if (a>300)
         break
     end
 end
