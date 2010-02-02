@@ -12,17 +12,10 @@ beta=1;
 column=0;
 row=1;
 lambda=0.1;
-%yu=0
+
 
 
 while not(isempty(not_visited))
-%    yu=yu+1
-  %  if yu>200
-   %     not_visited
-    %    current_route
-     %   phero = []
-     %   break
-  %  end
     for k=1:m
         start_time=max(current_time+B(current_client+1, k), A(k, 4));
         delta_time=start_time-current_time;
