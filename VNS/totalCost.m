@@ -1,5 +1,4 @@
 function cost=totalCost(routes, disttabel, truck_value)
-
 [n,m]=size(routes);
 cost=0;
 for i=1:n

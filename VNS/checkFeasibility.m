@@ -1,4 +1,6 @@
 function isFeasible = checkFeasibility(A, B, route, capacity)
+
+    route=normalize(route);
     [m,n]=size(route);
     isFeasible=1;
     
