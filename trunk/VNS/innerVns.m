@@ -1,18 +1,25 @@
-function routes=innerVns(routes, A, disttab, capacity)
-    cost=totalCost(routes, disttab, 0)
-    improvement=1;
-    while improvement==1
-        for i=1:1
-            if i==1
-                newRoutes=twoInterchange(routes, A, disttab, capacity);
-                %lembrar d por um break se jah for improvado no 1o anel
+function [routes imp cost]=innerVns(routes, A, disttab, capacity)
+    cost=totalCost(routes, disttab, 0);
+    k=1;
+    imp=0;
+    while k<=2
+        if k==1
+            [routes, improvement]=twoInterchange(routes, A, disttab, capacity);
+            if improvement==0
+                k=k+1;
+            else
+                imp=1;
             end
         end
-        newCost=totalCost(newRoutes, disttab, 0)
-        if cost==newCost
-            improvement=0;
-        else
-            routes=newRoutes;
-            cost=newCost;
+        if k==2
+            [routes, improvement]=crossExchange(A, disttab, routes, capacity);
+            if improvement==1
+                k=1;
+                imp=1;
+            else
+                k=k+1;
+            end
         end
     end
+    newCost=totalCost(routes, disttab, 0);
+    cost=newCost;

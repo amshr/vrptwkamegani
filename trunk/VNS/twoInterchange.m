@@ -1,13 +1,17 @@
-function newRoutes=twoInterchange(routes, A, disttab, capacity)
+function [newRoutes improvement]=twoInterchange(routes, A, disttab, capacity)
 
+improvement=0;
+currentCost=0;
 [n,m]=size(routes);
 for i=1:n
     routeSize(i,1)=sizeOfRoute(routes(i,:));
 end
-
+originalRoutes=routes;
 %For each pair of routes
 for l=1:n
     for k=l+1:n
+        costl = totalCost(routes(l,:), disttab, 0);
+        costk = totalCost(routes(k,:), disttab, 0);
         %For all combinations of 0, 1 and 2, but not (0, 0)
         for i=0:2
             for j=0:2
@@ -37,11 +41,10 @@ for l=1:n
                             newRoutek = addAt(newRoutek, elementl, jPos-1);
                             isFeasiblel = checkFeasibility(A, disttab, newRoutel, capacity);
                             isFeasiblek = checkFeasibility(A, disttab, newRoutek, capacity);
-                            costl = checkDCost(routes(l,:), newRoutel, A, disttab, capacity);
-                            costk = checkDCost(routes(k,:), newRoutek, A, disttab, capacity);
-                            cost = costl+costk;
-                            costint = cost;
-                            if (cost<0)
+                            newCostl = totalCost(newRoutel, disttab, 0);
+                            newCostk = totalCost(newRoutek, disttab, 0);
+                            cost = newCostl+newCostk-costl-costk;
+                            if (cost<currentCost-0.1)
                                 if isFeasiblel && isFeasiblek
                                     [rowl, sizel]=size(newRoutel);
                                     [rowk, sizek]=size(newRoutek);
@@ -62,7 +65,10 @@ for l=1:n
                                         end
                                     end
                                     newRoutes=removeZeros(routes);
-                                    return
+                                    costr=totalCost(newRoutes, disttab, 0)
+                                    currentCost=cost;
+                                    improvement=1;
+                                    routes=originalRoutes;
                                 end
                             end
                         end
@@ -72,4 +78,6 @@ for l=1:n
         end
     end
 end
-newRoutes=removeZeros(routes);
+if improvement==0
+    newRoutes=removeZeros(routes);
+end
