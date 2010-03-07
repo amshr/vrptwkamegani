@@ -6,6 +6,6 @@ newRoute=[];
 
 for i=1:m
     if (route(i)~=0)
-        newRoute=[newRoute route(i)];
+        newRoute(i)=route(i);
     end
 end
