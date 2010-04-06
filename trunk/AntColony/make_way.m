@@ -1,17 +1,17 @@
 function [current_route, phero]=make_way(capacity, clients, A, B, phero, tauZero)
 
 
-q=0.75;
+q=0.9;
 [m,n]=size(A);
 not_visited=clients;
 current_route=[];
 current_time=0;
 current_weight=0;
 current_client=0;
-beta=1;
+beta=1.2;
 column=0;
 row=1;
-lambda=0.1;
+ro=0.2;
 
 
 
@@ -74,12 +74,12 @@ while not(isempty(not_visited))
                 current_time=max(current_time+B(current_client+1, j), A(j, 4));
                 current_weight=current_weight+A(j, 3);
                 not_visited = removeElement(not_visited, pos, 1);
-                phero(current_client+1, j+1) = (1-lambda)*phero(current_client+1, j+1)+lambda*tauZero;
+                phero(current_client+1, j+1) = (1-ro)*phero(current_client+1, j+1)+ro*tauZero;
                 current_client=j;
                 %disp('pediu outro caminhao')
             end
         else
-            phero(current_client+1, 1) = (1-lambda)*phero(current_client+1, 1)+lambda*tauZero;
+            phero(current_client+1, 1) = (1-ro)*phero(current_client+1, 1)+ro*tauZero;
             current_weight=0;
             row=row+1;
             column=0;
@@ -120,7 +120,7 @@ while not(isempty(not_visited))
                 current_time=max(current_time+B(current_client+1, j), A(j, 4));
                 current_weight=current_weight+A(j, 3);
                 not_visited = removeElement(not_visited, ele, 1);
-                phero(current_client+1, j+1) = (1-lambda)*phero(current_client+1, j+1)+lambda*tauZero;
+                phero(current_client+1, j+1) = (1-ro)*phero(current_client+1, j+1)+ro*tauZero;
                 current_client=j;
             end
         end
