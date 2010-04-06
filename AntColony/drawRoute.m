@@ -1,5 +1,7 @@
-function drawRoute(x,y,bestRoutes)
+function drawRoute(A,bestRoutes)
 
+x=A(:,1);
+y=A(:,2);
 newplot;
 n = length(x);
 [blin, bcol] = size(bestRoutes);
