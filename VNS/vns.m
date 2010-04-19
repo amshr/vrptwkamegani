@@ -6,12 +6,15 @@ function routes=vns(A, capacity)
     prcost=0
     while notImp<=5
         k=1;
-        while k<=2
+        while k<=3
             if k==1
-                [routes1 impr]=randTwoInterchange(routes, A, B, capacity);
+                [routes1 impr]=randTwoInterchange(routes, A, B, capacity, 1);
             end
             if k==2
-                [routes1 impr]=randCrossExchange(A, B, routes, capacity);
+                [routes1 impr]=randTwopt(A, B, routes, capacity, 1);
+            end
+            if k==3
+                [routes1 impr]=randCrossExchange(A, B, routes, capacity, 1);
             end
             [routes2 impr cost]=innerVns(routes1, A, B, capacity);
             if round(prcost)==round(cost)

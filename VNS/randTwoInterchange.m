@@ -1,5 +1,6 @@
-function [newRoutes improvement]=randTwoInterchange(routes, A, disttab, capacity)
+function [newRoutes improvement]=randTwoInterchange(routes, A, disttab, capacity, a)
 
+tryi=0;
 improvement=0;
 currentCost=0;
 [n,m]=size(routes);
@@ -73,6 +74,11 @@ for l=randi(n):n
         end
     end
 end
+if a>30
+    newRoutes=routes;
+    return 
+end
 if improvement==0
-    [newRoutes improvement]=randTwoInterchange(routes, A, disttab, capacity);
+    a
+    [newRoutes improvement]=randTwoInterchange(routes, A, disttab, capacity, a+1);
 end
