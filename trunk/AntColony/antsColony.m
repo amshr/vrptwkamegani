@@ -33,7 +33,7 @@ while 1
     phero=global_update(phero, best_route, B, lambda);
     phero=global_update(phero, best_route, B, lambda);
     a=a+1
-    if (a>100)
+    if (a>50)
         break
     end
 end

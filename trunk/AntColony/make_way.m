@@ -8,10 +8,10 @@ current_route=[];
 current_time=0;
 current_weight=0;
 current_client=0;
-beta=1.2;
+beta=1;
 column=0;
 row=1;
-ro=0.2;
+ro=0.1;
 
 
 
