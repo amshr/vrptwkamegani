@@ -1,5 +1,8 @@
 function routes=vns(A, capacity)
 
+    defaultStream = RandStream('mrg32k3a');
+    RandStream.setDefaultStream(defaultStream);
+    
     B=disttab(A);
     routes=PFIH(A,B,capacity);
     notImp=3;
