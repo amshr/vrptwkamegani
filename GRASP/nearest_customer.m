@@ -25,7 +25,7 @@ while not_done
         if n~=0
             newRoute=[creating_route, n];
             if checkFeasibility(A, B, newRoute, capacity)
-                creating_route=newRoute
+                creating_route=newRoute;
                 last_customer=n;
                 added_customers(n)=1;
             else
@@ -45,5 +45,4 @@ while not_done
     for j=1:c
         route(truck,j)=creating_route(j);
     end
-    route
 end
