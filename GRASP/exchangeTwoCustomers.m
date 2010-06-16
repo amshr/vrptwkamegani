@@ -1,5 +1,4 @@
 function allRoutes=exchangeTwoCustomers(A, B, capacity, allRoutes, routeToModify)
-routeToModify
 route=allRoutes(routeToModify, :);
 route=removeZeros(route);
 [m,n]=size(route);
