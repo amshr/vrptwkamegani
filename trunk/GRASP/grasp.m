@@ -30,12 +30,10 @@ while i<maxIteration
         if h==3
             [newRoute, numberOfRoutes]=updateRoutes(A, B, capacity, tabuTenure, x3, mutationP);
         end
-        %eu vou ter que organizar isso... ele soh tah vendo se algum custo
-        %novo eh menor que o minimo e atualizando td
         newCost=totalCost(newRoute, B)
         if newCost<best
             best=newCost;
-            bestRoutes=newRoute
+            bestRoutes=newRoute;
             j=0;
         end
         routeToExchange=1+int8(rand(1,1)*(numberOfRoutes-1));
