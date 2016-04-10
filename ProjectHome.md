@@ -1,0 +1,1 @@
+Solving vehicle routing problems with time window by using simulated annealing, tabu search, variable neighborhood search, greedy randomized adaptive search procedure and ant colony algorithms.
